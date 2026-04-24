@@ -1,0 +1,26 @@
+연예인 착장 아이템과 SSF 상품의 유사한 점을 한 문장으로 설명하세요.
+
+연예인 착장:
+- 색상: {query_color}
+- 실루엣: {query_silhouette}
+- 패턴: {query_pattern}
+- 소재: {query_texture}
+- 스타일: {query_style}
+
+SSF 매칭 상품:
+- 상품명: {product_name}
+- 색상: {product_colors}
+- 핏: {product_fits}
+- 패턴: {product_patterns}
+- 소재: {product_textures}
+
+규칙:
+- 40자 이내 한국어
+- 공통 속성 2~3개를 자연스럽게 언급
+- "유사합니다"로 끝낼 것
+- JSON이나 마크다운 없이 문장만 출력
+
+예시 출력:
+오버사이즈 실루엣과 블랙 컬러, 포멀한 스타일이 유사합니다
+루즈한 와이드핏과 베이지 톤이 유사합니다
+데님 소재와 워싱 처리, 스트레이트 핏이 유사합니다

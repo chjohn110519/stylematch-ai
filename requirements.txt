@@ -1,0 +1,5 @@
+anthropic>=0.40
+streamlit>=1.35
+pillow>=10
+python-dotenv
+pydantic>=2

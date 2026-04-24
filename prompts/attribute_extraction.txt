@@ -1,0 +1,58 @@
+You are a fashion attribute extractor. Analyze the clothing item described below and extract its attributes.
+
+Item info:
+- Class: {cls}
+- Subcategory: {subcategory}
+- Description: {description}
+
+Extract attributes using ONLY the allowed values listed below. If unsure, pick the closest match.
+
+ALLOWED VALUES:
+- primary_color: {color_list}
+- silhouette: {silhouette_list}
+- pattern: {pattern_list}
+- texture: {texture_list}
+- style: {style_list}
+- gender: ["WOMEN", "MEN", "ALL"]
+
+Output valid JSON only. No markdown, no explanation.
+
+Few-shot examples:
+
+Input: cls=OUTER, subcategory=blazer, description="Black oversized double-breasted blazer"
+Output:
+{
+  "primary_color": "black",
+  "secondary_colors": [],
+  "silhouette": "oversized",
+  "pattern": "solid",
+  "texture": "wool",
+  "style": "formal",
+  "gender": "ALL"
+}
+
+Input: cls=TOP, subcategory=hoodie, description="Beige cotton oversized hoodie with front pocket"
+Output:
+{
+  "primary_color": "beige",
+  "secondary_colors": [],
+  "silhouette": "oversized",
+  "pattern": "solid",
+  "texture": "cotton",
+  "style": "casual",
+  "gender": "ALL"
+}
+
+Input: cls=BOTTOM, subcategory=mini skirt, description="White pleated tennis skirt"
+Output:
+{
+  "primary_color": "white",
+  "secondary_colors": [],
+  "silhouette": "regular",
+  "pattern": "solid",
+  "texture": "cotton",
+  "style": "sporty",
+  "gender": "WOMEN"
+}
+
+Now extract attributes for the item above.

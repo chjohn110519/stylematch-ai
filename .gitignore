@@ -1,0 +1,29 @@
+# 환경 변수
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# 생성 파일 (scnt.a_items.json에서 재생성 가능)
+data/ssf_products.db
+
+# 데모 샘플 이미지 (개인 파일)
+data/demo_samples/
+data/golden_samples.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
