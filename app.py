@@ -8,8 +8,8 @@ from pathlib import Path
 import streamlit as st
 
 # Streamlit Cloud secrets → 환경 변수 브릿지 (로컬 .env는 vision_analyzer에서 load_dotenv로 처리)
-if hasattr(st, "secrets") and "ANTHROPIC_API_KEY" in st.secrets:
-    os.environ["ANTHROPIC_API_KEY"] = st.secrets["ANTHROPIC_API_KEY"]
+if hasattr(st, "secrets") and "OPENAI_API_KEY" in st.secrets:
+    os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 
 from PIL import Image, ImageDraw, ImageFont
 

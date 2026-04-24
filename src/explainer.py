@@ -1,9 +1,9 @@
-"""Claude API를 이용한 매칭 근거 텍스트 생성."""
+"""OpenAI API를 이용한 매칭 근거 텍스트 생성."""
 
 from pathlib import Path
 
-import anthropic
 from dotenv import load_dotenv
+from openai import OpenAI
 
 from src.matcher import MatchResult
 from src.schema import (
@@ -14,7 +14,7 @@ from src.schema import (
 load_dotenv()
 
 _PROMPTS = Path(__file__).parent.parent / "prompts"
-MODEL = "claude-haiku-4-5-20251001"  # 근거 텍스트는 Haiku로 비용 절감
+MODEL = "gpt-4o-mini"
 MAX_TOKENS = 128
 
 
@@ -28,7 +28,7 @@ def generate_explanation(
     match: MatchResult,
 ) -> str:
     """40자 이내 한국어 유사 근거 문장 생성."""
-    client = anthropic.Anthropic()
+    client = OpenAI()
     template = (_PROMPTS / "match_explanation.txt").read_text(encoding="utf-8")
 
     prompt = template.format(
@@ -44,14 +44,13 @@ def generate_explanation(
         product_textures=_ko(match.matched_textures, SSF_TEXTURE_KO),
     )
 
-    msg = client.messages.create(
+    response = client.chat.completions.create(
         model=MODEL,
         max_tokens=MAX_TOKENS,
         messages=[{"role": "user", "content": prompt}],
     )
 
-    text = msg.content[0].text.strip()
-    # 40자 초과 시 앞부분 자르기
+    text = response.choices[0].message.content.strip()
     if len(text) > 40:
         text = text[:38] + "…"
     return text
