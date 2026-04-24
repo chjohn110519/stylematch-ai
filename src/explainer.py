@@ -44,16 +44,18 @@ def generate_explanation(
         product_textures=_ko(match.matched_textures, SSF_TEXTURE_KO),
     )
 
-    response = client.chat.completions.create(
-        model=MODEL,
-        max_tokens=MAX_TOKENS,
-        messages=[{"role": "user", "content": prompt}],
-    )
-
-    text = response.choices[0].message.content.strip()
-    if len(text) > 40:
-        text = text[:38] + "…"
-    return text
+    try:
+        response = client.chat.completions.create(
+            model=MODEL,
+            max_tokens=MAX_TOKENS,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        text = (response.choices[0].message.content or "").strip()
+        if len(text) > 40:
+            text = text[:38] + "…"
+        return text
+    except Exception:
+        return fallback_explanation(query, match)
 
 
 def fallback_explanation(query: QueryAttributes, match: MatchResult) -> str:
