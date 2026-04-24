@@ -1,11 +1,15 @@
-You are a fashion attribute extractor. Analyze the clothing item described below and extract its attributes.
+You are a fashion attribute extractor. Extract structured attributes from the clothing item description below.
 
 Item info:
 - Class: {cls}
 - Subcategory: {subcategory}
 - Description: {description}
 
-Extract attributes using ONLY the allowed values listed below. If unsure, pick the closest match.
+RULES:
+1. Extract attributes ONLY from the description text above. Do NOT guess from context.
+2. primary_color MUST match the color stated in the description (e.g. "White blazer" → "white").
+3. For texture: infer from subcategory if not stated (blazer/suit/jacket → "wool", leather jacket → "leather", hoodie/sweatshirt → "cotton", denim jacket → "denim", knit → "knit").
+4. Use ONLY the allowed values listed below. Pick the closest match if unsure.
 
 ALLOWED VALUES:
 - primary_color: {color_list}
@@ -21,7 +25,7 @@ Few-shot examples:
 
 Input: cls=OUTER, subcategory=blazer, description="Black oversized double-breasted blazer"
 Output:
-{
+{{
   "primary_color": "black",
   "secondary_colors": [],
   "silhouette": "oversized",
@@ -29,11 +33,23 @@ Output:
   "texture": "wool",
   "style": "formal",
   "gender": "ALL"
-}
+}}
+
+Input: cls=OUTER, subcategory=blazer, description="White tailored blazer with structured silhouette and sharp lapels"
+Output:
+{{
+  "primary_color": "white",
+  "secondary_colors": [],
+  "silhouette": "regular",
+  "pattern": "solid",
+  "texture": "wool",
+  "style": "formal",
+  "gender": "WOMEN"
+}}
 
 Input: cls=TOP, subcategory=hoodie, description="Beige cotton oversized hoodie with front pocket"
 Output:
-{
+{{
   "primary_color": "beige",
   "secondary_colors": [],
   "silhouette": "oversized",
@@ -41,11 +57,11 @@ Output:
   "texture": "cotton",
   "style": "casual",
   "gender": "ALL"
-}
+}}
 
 Input: cls=BOTTOM, subcategory=mini skirt, description="White pleated tennis skirt"
 Output:
-{
+{{
   "primary_color": "white",
   "secondary_colors": [],
   "silhouette": "regular",
@@ -53,6 +69,6 @@ Output:
   "texture": "cotton",
   "style": "sporty",
   "gender": "WOMEN"
-}
+}}
 
 Now extract attributes for the item above.

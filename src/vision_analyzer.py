@@ -121,10 +121,7 @@ def extract_attributes(
             messages=[
                 {
                     "role": "user",
-                    "content": [
-                        {"type": "image_url", "image_url": {"url": image_url}},
-                        {"type": "text", "text": prompt_text},
-                    ],
+                    "content": prompt_text,  # 텍스트만 — 이미지 배경 혼란 방지
                 }
             ],
         )

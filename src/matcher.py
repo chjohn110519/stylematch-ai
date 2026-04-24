@@ -88,9 +88,12 @@ def _score(
     pat_matches = prod_patterns & set(ssf_patterns)
     pat_score   = 1.0 if pat_matches else 0.0
 
-    # 소재
+    # 소재 (매핑 없는 소재[cotton 등]는 중립 0.5, 매핑 있으면 1.0/0.0)
     tex_matches = prod_textures & set(ssf_textures)
-    tex_score   = 1.0 if tex_matches else 0.0
+    if not ssf_textures:
+        tex_score = 0.5
+    else:
+        tex_score = 1.0 if tex_matches else 0.0
 
     # 스타일
     sty_matches = prod_styles & set(ssf_styles)
